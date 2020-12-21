@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    network_mode: host
+    ports:
+      - 1883:1883
+    volumes:
+      - ./data:/mosquitto/data
+      - ./logs:/mosquitto/logs
+      - ./config:/mosquitto/config
+    restart: always
