@@ -4,7 +4,7 @@
 https://redirect.armbian.com/region/EU/odroidxu4/Buster_current_minimal
 Copy image to the SD Card
 
-## Install Armbian for Odroid XU4 (Buster with Kernel 5.4)
+## Configurate Armbian
 ### 1.1 Install firewall
 sudo apt install ufw
 
@@ -45,46 +45,17 @@ mkdir config && mkdir data && mkdir logs
 touch ./config/mosquitto.conf
 touch ./config/mosquitto.passwd
 
-Default configuration file 
-3.4 Write default configuration
->>
-pid_file /var/run/mosquitto.pid
-
-persistence true
-persistence_location /mosquitto/data/
-
-log_dest file /mosquitto/log//mosquitto.log
-log_dest stdout
-
-password_file /mosquitto/config//mosquitto.passwd
-allow_anonymous false
-<<
+### 3.4 Default configuration file 
 
 ### 3.4 Create docker-compose.yaml
->>
-version: '3'
 
-services:
-	mosquitto:
-		image: eclipse-mosquitto
-		container_name: mqtt
-		network_mode: host
-		ports:
-			- 1883:1883
-		volumes:
-			- ./data:/mosquitto/data
-			- ./logs:/mosquitto/logs
-			- ./config:/mosquitto/config
-		restart: unless-stopped
-<<
-
-3.5 Allow MQTT port i filrewall
+### 3.5 Allow MQTT port i filrewall
 sudo ufw allow 1883
 
-3.6 Run docker
+### 3.6 Run docker
 sudo docker-compose up -d
 
-3.7 reate credentials:
+### 3.7 Create credentials:
 sudo docker-compose exec mosquitto sh -c "mosquitto_passwd /mosquitto/config/passwd [username]"
 
 Now after system reboot it must start auto
