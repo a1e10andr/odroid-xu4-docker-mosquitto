@@ -58,5 +58,5 @@ sudo docker-compose up -d
 ### 3.7 Create credentials:
 sudo docker-compose exec mosquitto sh -c "mosquitto_passwd /mosquitto/config/passwd [username]"
 
-Now after system reboot it must start auto
+Now after system reboot it must autostart
 
